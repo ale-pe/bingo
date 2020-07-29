@@ -1,0 +1,107 @@
+<!DOCTYPE HTML>  
+<html>  
+  
+<head>  
+    <title>Bingo</title> 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/alasql/0.3/alasql.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.7.12/xlsx.core.min.js"></script>
+</head> 
+  
+<body style = "text-align:center;">  
+      
+    <div class="container-fluid" id="home">
+        <div class="row">
+            <div class="col-12 p-0">
+                <div class="jumbotron min-vh-100 text-center m-0 bg-info d-flex flex-column justify-content-center">
+                    <h1 class="display-4">Générateur Bingo</h1>
+                    <p class="lead"></p>
+                    <p class="lead">
+                        <a class="btn btn-primary btn-lg" href="#" onclick="timer = setInterval(bingo, 3000);document.getElementById('home').style.display ='none';document.getElementById('bingo').style.display = 'block'"role="button">Lancer la partie</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid" id="bingo">
+        <div class="row">
+            <div class="col-12 p-0">
+                <div class="jumbotron min-vh-100 text-center m-0 bg-info d-flex flex-column justify-content-center">
+                    <div class="card">
+
+                        <div class="card-body">
+                            <h1 style=font-size:100px class="card-title" id="displaynum">Veuillez Patienter</h1>
+                          <p class="card-text"></p>
+                        </div>
+                        <div class="card-header" id="preced"></div>
+                      </div>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+<script>
+var timer = 0;
+var num1 = 0;
+var num2 = 0;
+var num3 = 0; 
+
+document.getElementById("home").style.display = "block"
+document.getElementById("bingo").style.display = "none"
+
+
+
+
+
+
+var listnum = [1,2,3,4,5,6,7,8,9,10,
+                11,12,13,14,15,16,17,18,19,20,
+                21,22,23,24,25,26,27,28,29,30,
+                31,32,33,34,35,36,37,38,39,40,
+                41,42,43,44,45,46,47,48,49,50,
+                51,52,53,54,55,56,57,58,59,60,
+                61,62,63,64,65,66,67,68,69,70,
+                71,72,73,74,75,76,77,78,79,80,
+                81,82,83,84,85,86,87,88,89,90]
+
+
+
+    function bingo(){
+        var item = listnum[Math.floor(Math.random() * listnum.length)];
+        console.log(item);
+        var index = listnum.indexOf(item);
+        if (listnum.length == 0){
+            clearInterval(timer);
+            console.log("stop")
+        }
+        if (index > -1) {
+    listnum.splice(index, 1);
+}
+            console.log(listnum)
+            console.log(listnum.length)
+            document.getElementById("displaynum").innerHTML = item
+            num3 = num2
+            num2 = num1
+            num1 = item
+            document.getElementById("preced").innerHTML = "Numéros précédents : "+num1+" - "+num2+" - "+num3
+            var audio = new Audio('sounds/'+item+'.mp3');
+            audio.play();
+        }
+        
+
+
+    
+
+</script>
+
+</body>  
+  
+</html> 
